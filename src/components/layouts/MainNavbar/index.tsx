@@ -3,6 +3,7 @@ import { Container } from './style';
 import SideNavbar from '../../basic/SideNavbar';
 import TopNavbar from '../../basic/TopNavbar';
 import { Outlet } from 'react-router-dom';
+import ProtectedRoute from '../ProtectedRoute';
 
 const MainNavbar: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const MainNavbar: React.FC = () => {
       <SideNavbar />
       <div className="main-container">
         <TopNavbar />
-        <Outlet />
+        <ProtectedRoute element={<Outlet />} />
       </div>
     </Container>
   );

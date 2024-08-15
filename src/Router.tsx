@@ -10,7 +10,6 @@ import {
   Sales,
 } from './views';
 import { routes } from './utils/routes';
-import ProtectedRoute from './components/layouts/ProtectedRoute';
 import MainNavbar from './components/layouts/MainNavbar';
 
 const MainRouter: React.FC = () => {
@@ -27,26 +26,11 @@ const MainRouter: React.FC = () => {
           />
         </Route>
         <Route element={<MainNavbar />}>
-          <Route
-            path={routes.sales}
-            element={<ProtectedRoute element={<Sales />} />}
-          />
-          <Route
-            path={routes.editSales()}
-            element={<ProtectedRoute element={<EditSales />} />}
-          />
-          <Route
-            path={routes.dashboard}
-            element={<ProtectedRoute element={<MainDashboard />} />}
-          />
-          <Route
-            path={routes.products}
-            element={<ProtectedRoute element={<div>Products</div>} />}
-          />
-          <Route
-            path={routes.categories}
-            element={<ProtectedRoute element={<div>Categories</div>} />}
-          />
+          <Route path={routes.sales} element={<Sales />} />
+          <Route path={routes.editSales()} element={<EditSales />} />
+          <Route path={routes.dashboard} element={<MainDashboard />} />
+          <Route path={routes.products} element={<div>Products</div>} />
+          <Route path={routes.categories} element={<div>Categories</div>} />
         </Route>
       </Routes>
     </BrowserRouter>
