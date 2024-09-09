@@ -6,7 +6,7 @@ import { ISales } from '../../utils/interfaces/sales.interface';
 interface ISalesState {
   sales: any[];
   purchasedProducts: any[];
-  salesDetails: ISales;
+  saleDetails: ISales;
   page: number;
   error: string | null;
 }
@@ -14,7 +14,7 @@ interface ISalesState {
 const initialState: ISalesState = {
   sales: [],
   purchasedProducts: [],
-  salesDetails: {
+  saleDetails: {
     id: 0,
     reference: '',
     amount: 0,
@@ -24,7 +24,9 @@ const initialState: ISalesState = {
     size: '',
     createdAt: new Date().toLocaleDateString('en-CA'),
     updatedAt: new Date().toLocaleDateString('en-CA'),
-    user: '',
+    user: {
+      name: '',
+    },
   },
   page: 1,
   error: null,
@@ -43,7 +45,10 @@ export const getSaleDetails = createAsyncThunk(
   'getSaleDetails',
   async (id: string, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(apiEndpoints.editSales(id));
+      const includeProductsPurchased = true;
+      const response = await axiosInstance.get(
+        apiEndpoints.editSales(id, includeProductsPurchased)
+      );
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -74,7 +79,7 @@ const salesSlice = createSlice({
         getSaleDetails.fulfilled,
         (state, action: PayloadAction<any>) => {
           state.purchasedProducts = action.payload.purchasedProducts;
-          state.salesDetails = action.payload.salesDetails;
+          state.saleDetails = action.payload.saleDetails;
         }
       )
       .addCase(getSaleDetails.rejected, (state, action: PayloadAction<any>) => {

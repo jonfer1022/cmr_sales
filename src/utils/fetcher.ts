@@ -1,9 +1,10 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
+const api = '/api';
 const baseURL: string = 'http://localhost:3001';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL,
+  baseURL: `${baseURL}${api}`,
   timeout: 5000,
 });
 

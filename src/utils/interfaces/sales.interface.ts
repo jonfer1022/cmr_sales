@@ -8,5 +8,7 @@ export interface ISales {
   size: string;
   createdAt: string;
   updatedAt: string;
-  user: string;
+  user: {
+    name: string;
+  };
 }

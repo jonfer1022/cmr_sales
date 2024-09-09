@@ -21,7 +21,7 @@ const initColumns = [
   { label: 'Total price', attribute: 'totalPrice' },
   { label: 'Date creation', attribute: 'createdAt' },
   { label: 'Date last update', attribute: 'updatedAt' },
-  { label: 'User', attribute: 'user' },
+  { label: 'User', attribute: 'userName' },
 ];
 
 const Sales: React.FC = () => {

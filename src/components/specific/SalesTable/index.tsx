@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { GenericTable } from '../../basic/GenericTable';
 import Pagination from '../../basic/Pagination';
 import { FaRegEdit } from 'react-icons/fa';
@@ -26,6 +26,17 @@ const SalesTable: React.FC<ISalesTableProps> = ({
   onEdit,
   onRemove,
 }) => {
+  const [_sales, setSales] = useState<any[]>([]);
+  useEffect(() => {
+    if (sales.length) {
+      const _sales = sales.map((sale) => ({
+        ...sale,
+        userName: sale.user.name,
+      }));
+      setSales(_sales);
+    }
+  }, [sales]);
+
   const handleAction = useCallback(
     (action: string, row: any) => {
       switch (action) {
@@ -46,7 +57,7 @@ const SalesTable: React.FC<ISalesTableProps> = ({
     <>
       <GenericTable
         headers={headers}
-        data={sales}
+        data={_sales}
         actions={(row) => (
           <div className="actions">
             <div onClick={() => handleAction(edit, row)}>

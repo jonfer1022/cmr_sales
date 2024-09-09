@@ -16,12 +16,12 @@ import { ISales } from '../../utils/interfaces/sales.interface';
 const initColumns = [
   { label: 'Reference', attribute: 'reference' },
   { label: 'Amount', attribute: 'amount' },
-  { label: 'Unit price', attribute: 'unitPrice' },
+  { label: 'Unit price', attribute: 'price' },
   { label: 'Total price', attribute: 'totalPrice' },
   { label: 'Category', attribute: 'category' },
   { label: 'Size', attribute: 'size' },
   { label: 'Date last update', attribute: 'updatedAt' },
-  { label: 'Added by User', attribute: 'user' },
+  { label: 'Added by User', attribute: 'userName' },
 ];
 
 const EditSales: React.FC = () => {
@@ -30,7 +30,7 @@ const EditSales: React.FC = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [columns] = useState<IGenericTableHeader[]>(initColumns);
-  const { purchasedProducts, salesDetails } = useAppSelector(
+  const { purchasedProducts, saleDetails } = useAppSelector(
     (state) => state.sales
   );
 
@@ -78,7 +78,7 @@ const EditSales: React.FC = () => {
     <Container>
       <HeadingTwo text={`Editing the number reference ${id}`} />
       <Formik
-        initialValues={salesDetails}
+        initialValues={saleDetails}
         onSubmit={() => {}}
         enableReinitialize={true}
       >
@@ -88,7 +88,7 @@ const EditSales: React.FC = () => {
               label="Reference"
               name="referencia"
               classname="input-text"
-              value={'Number Reference ' + values.id}
+              value={`${values.reference}`}
               disabled={true}
               // touched={touched}
               // onChange={(value) => handleChange('email')(value)}
@@ -173,7 +173,7 @@ const EditSales: React.FC = () => {
               label="User"
               name="user"
               classname="input-text"
-              value={values.user}
+              value={values.user.name}
               onChange={() => {}}
               disabled={true}
               type="text"
